@@ -2,7 +2,7 @@ const express         = require('express'),
       app             = express(),
       bodyParser      = require('body-parser'),
       methodOverride  = require('method-override'),
-      path            = require('path')
+      path            = require('path'),
       mongoose        = require('mongoose'),
       helmet          = require('helmet');
 
