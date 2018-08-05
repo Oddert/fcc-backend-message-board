@@ -16,6 +16,22 @@ const BoardRoutes     = require('./routes/board'),
 
 require('dotenv').config();
 
+app.use(helmet({
+  frameguard: {
+    action: 'deny'
+  },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'"]
+    }
+  },
+  hidePoweredBy: {
+    setTo: 'PHP 4.2.0'
+  },
+  dnsPrefetchControl: true
+}));
+
 mongoose.connect(process.env.DATABASE);
 
 app.use(bodyParser.urlencoded({ extended: true }));
