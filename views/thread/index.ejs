@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+
+  <a href="/b/<%= board %>">&#60; Back to board: <%= board %></a>
+  <% if (thread.reported) { %>
+    <h1 style='border: 3px solid tomato;'>[REPORTED] <%= thread.text %></h1>
+  <% } else { %>
+    <h1><%= thread.text %></h1>
+  <% } %>
+  <em>id: <%= thread._id %></em>
+  <hr />
+  <h3>Add a reply:</h3>
+  <form action="/api/replies/<%= thread._id %>/" method="POST">
+    <input type="text" name="thread_id" value="<%= thread._id %>" hidden>
+    <input type="text" name="text" placeholder="Reply Text" required>
+    <input type="password" name="delete_password" placeholder="Delete Password" required>
+    <button>Add Reply</button>
+  </form>
+  <hr />
+  <h3>Replies:</h3>
+  <ul>
+    <% thread.replies.forEach(each => { %>
+      <% if (each.deleted) { %>
+        <li style='border: 1px dashed #bec3c7;'>[deleted]</li>
+      <% } else { %>
+        <li style='border: 1px dashed #bec3c7;'>
+          <% if (each.reported) { %>
+            <p style='border: 2px solid tomato;'>[REPORTED] <%= each.text %></p>
+          <% } else { %>
+            <p><%= each.text %></p>
+          <% } %>
+          <form action="/<%= thread.text %>/<%= each._id %>?_method=DELETE" method="POST">
+            <input type="text" name="delete_password" placeholder="Delete password">
+            <button>Delete</button>
+          </form>
+          <form action="/api/replies/<%= thread._id %>?_method=PUT" method="POST">
+            <input type="text" name="reply_id" value="<%= each._id %>" hidden />
+            <button>Report sin</button>
+          </form>
+        </li>
+      <% } %>
+    <% }) %>
+  </ul>
+<% include ../partials/footer %>

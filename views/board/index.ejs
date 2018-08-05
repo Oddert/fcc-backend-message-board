@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+
+  <a href="/">&#60; Home Page</a>
+  <h1>Welcome to the board /b/<%= board.name %></h1>
+  <em><%= board._id %></em>
+  <hr />
+  <h3>Create New Thread:</h3>
+  <form action="/api/threads/<%= board._id %>/" method="POST">
+    <input type="text" name="text" placeholder="Board name" required>
+    <input type="password" name="delete_password" placeholder="Delete Password" required>
+    <button>Add Thread</button>
+  </form>
+  <hr />
+  <h3>View all threads:</h3>
+  <ul>
+    <% board.threads.forEach(each => { %>
+      <li>
+        <% if (each.reported) { %>
+          <a href="/b/<%= board.name %>/<%= each._id %>">[REPORTED] <%= each.text %></a>
+        <% } else { %>
+          <a href="/b/<%= board.name %>/<%= each._id %>"><%= each.text %></a>
+        <% } %>
+        <form action="/api/threads/<%= board._id %>?_method=DELETE" method="POST">
+          <input type="text" name="thread_id" value="<%= each._id %>" hidden />
+          <input type="text" name="delete_password" placeholder="Password to delete thread" />
+          <button>Delete</button>
+        </form>
+        <form action="/api/threads/<%= board._id %>?_method=PUT" method="POST">
+          <input type="text" name="thread_id" value="<%= each._id %>" hidden />
+          <button>Report sin</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <!-- <p><%= board %></p> -->
+
+
+<% include ../partials/footer %>

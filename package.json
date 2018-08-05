@@ -1,0 +1,15 @@
+{
+  "name": "fcc-backend-message-board",
+  "version": "1.0.0",
+  "description": "A message board api for the free code camp ISQA challenge",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robyn Veitch",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0"
+  }
+}
