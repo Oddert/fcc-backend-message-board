@@ -61,7 +61,7 @@ router.get('/api/replies/:board_id', (req, res) => {
 })
 //thread_id query
 
-router.post('/api/threads/:board_id/', (req, res) => {
+router.post('/api/threads/:board_id', (req, res) => {
   Board.findById(req.params.board_id, (err, foundBoard) => {
     if (err) {
       console.log(err);
