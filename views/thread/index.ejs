@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include('partials/header') -%>
 
   <a href="/b/<%= board %>">&#60; Back to board: <%= board %></a>
   <% if (thread.reported) { %>
@@ -40,4 +40,4 @@
       <% } %>
     <% }) %>
   </ul>
-<% include ../partials/footer %>
+  <%- include('partials/footer') -%>
